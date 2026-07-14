@@ -4,22 +4,31 @@ metadata:
   name: account-service
   labels:
     app: account-service
+
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       app: account-service
+
   template:
     metadata:
       labels:
         app: account-service
+
     spec:
       containers:
         - name: account-service
           image: arwahmissi/account-service:latest
           imagePullPolicy: Always
+
           ports:
             - containerPort: 8081
+
+          env:
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres-account-service:5432/accountdb"
 
 ---
 apiVersion: v1
